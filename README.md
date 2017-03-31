@@ -25,8 +25,8 @@ StandIn is a fluent mock framework for akka actors
     StandIn.when(actor).receivesAny(String.class).thenReply("You send me a String");
 
     // Define reply when received message matches a predicate
-        Predicate<Object> condition = msg -> msg.equals("hello");
-        StandIn.when(standIn).receives(condition).thenReply("You said hello");
+    Predicate<Object> condition = msg -> msg.equals("hello");
+    StandIn.when(standIn).receives(condition).thenReply("You said hello");
 
     // Define multiple replies, combine with any of the receive* definitions
     StandIn.when(actor).receivesEq("hello").thenReply("You said hello","Hello Again", "I refuse to say more hello");
