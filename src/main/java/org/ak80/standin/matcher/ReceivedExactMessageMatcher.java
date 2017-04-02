@@ -15,4 +15,9 @@ public class ReceivedExactMessageMatcher implements ReceivedMessageMatcher {
     public boolean matches(Object message) {
         return exactMessage.equals(message);
     }
+
+    @Override
+    public String explain() {
+        return "a message equal to \"" + exactMessage + "\"";
+    }
 }

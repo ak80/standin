@@ -1,7 +1,8 @@
-package org.ak80.standin;
+package org.ak80.standin.stubbing;
 
 import akka.actor.ActorRef;
-import org.ak80.standin.matcher.*;
+import org.ak80.standin.StandIn;
+import org.ak80.standin.matcher.ReceivedMessageMatcher;
 import org.ak80.standin.reply.ReplyMessages;
 import org.ak80.standin.reply.ReplyWith;
 
@@ -32,21 +33,23 @@ public class StandInStubbingForReply {
      * <p> If there are more than one, they a returned in the given order, and the last message is repeatedly
      * returned if necessary
      * </p>
+     *
      * @param replyMessages the messages
      * @return this
      */
-    public StandInStubbingForReceives thenReply(Object ... replyMessages) {
-        standIn.tell(new StubbingDefinition(receivedMessageMatcher,new ReplyMessages(replyMessages)), ActorRef.noSender());
+    public StandInStubbingForReceives thenReply(Object... replyMessages) {
+        standIn.tell(new StubbingDefinition(receivedMessageMatcher, new ReplyMessages(replyMessages)), ActorRef.noSender());
         return new StandInStubbingForReceives(standIn);
     }
 
     /**
      * Defines that the reply messages are created with a function
+     *
      * @param replyFunction
      * @return stubbing to define received
      */
     public StandInStubbingForReceives thenReplyWith(Function<Object, Object> replyFunction) {
-        standIn.tell(new StubbingDefinition(receivedMessageMatcher,new ReplyWith(replyFunction)), ActorRef.noSender());
+        standIn.tell(new StubbingDefinition(receivedMessageMatcher, new ReplyWith(replyFunction)), ActorRef.noSender());
         return new StandInStubbingForReceives(standIn);
     }
 

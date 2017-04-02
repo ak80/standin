@@ -15,4 +15,9 @@ public class ReceivedAnyClassMessageMatcher implements ReceivedMessageMatcher {
     public boolean matches(Object message) {
         return clazz.isInstance(message);
     }
+
+    @Override
+    public String explain() {
+        return "any message of type " + clazz;
+    }
 }

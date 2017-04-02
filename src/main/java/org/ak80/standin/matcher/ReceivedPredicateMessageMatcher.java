@@ -17,4 +17,9 @@ public class ReceivedPredicateMessageMatcher implements ReceivedMessageMatcher {
     public boolean matches(Object message) {
         return condition.test(message);
     }
+
+    @Override
+    public String explain() {
+        return "a message matching a custom condition";
+    }
 }

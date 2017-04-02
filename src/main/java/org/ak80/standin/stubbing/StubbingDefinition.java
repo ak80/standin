@@ -1,4 +1,4 @@
-package org.ak80.standin;
+package org.ak80.standin.stubbing;
 
 import org.ak80.standin.matcher.ReceivedMessageMatcher;
 import org.ak80.standin.reply.ReplyMessageDefinition;
@@ -19,6 +19,11 @@ public class StubbingDefinition implements ReceivedMessageMatcher {
     @Override
     public boolean matches(Object message) {
         return receivedMessageMatcher.matches(message);
+    }
+
+    @Override
+    public String explain() {
+        return receivedMessageMatcher.explain();
     }
 
     public Object getReplyMessage(Object receivedMessage) {

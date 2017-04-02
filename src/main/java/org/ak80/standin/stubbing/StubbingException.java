@@ -1,4 +1,4 @@
-package org.ak80.standin;
+package org.ak80.standin.stubbing;
 
 /**
  * Exception during stubbing

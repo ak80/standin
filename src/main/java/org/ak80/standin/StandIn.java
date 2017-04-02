@@ -4,18 +4,21 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.pattern.PatternsCS;
+import org.ak80.standin.stubbing.StandInStubbingForReceives;
+import org.ak80.standin.stubbing.StubbingException;
+import org.ak80.standin.verification.StandInVerificationForReceive;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 
 /**
- * StandIn - static functions to create a StandIn and define stubbing
+ * StandIn - static functions to create a StandIn and define stubbing and verification
  */
 public class StandIn extends AbstractActor {
 
     /**
      * Create a StandIn, a stub/mock Actor
+     *
      * @param actorSystem the actor system in which the actor is created
      * @return the StandIn
      */
@@ -25,6 +28,7 @@ public class StandIn extends AbstractActor {
 
     /**
      * Start stubbing for a standIn
+     *
      * @param standIn
      */
     public static StandInStubbingForReceives when(ActorRef standIn) {
@@ -33,11 +37,12 @@ public class StandIn extends AbstractActor {
 
     /**
      * Check that the actor is a stand in - or throw an exception
+     *
      * @param standIn the stand in to check
      */
     public static void verifyStandIn(ActorRef standIn) {
         CompletableFuture future = (CompletableFuture) PatternsCS.ask(standIn, new StandInActor.IdentifyMessage(), 1000L);
-        if(!replyIsStandIn(future)) {
+        if (!replyIsStandIn(future)) {
             throw new StubbingException("The ActorRef is not for a StandIn");
         }
     }
@@ -46,7 +51,11 @@ public class StandIn extends AbstractActor {
         try {
             return future.get().equals(StandInActor.class);
         } catch (InterruptedException | ExecutionException e) {
-           return false;
+            return false;
         }
+    }
+
+    public static StandInVerificationForReceive verify(ActorRef standIn) {
+        return new StandInVerificationForReceive(standIn);
     }
 }

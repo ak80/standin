@@ -41,15 +41,42 @@ StandIn is a fluent mock framework for akka actors
         .receivesEq("goodbye").thenReply("You said goodbye")
         .receivesAny(String.class).thenReply("You said something")
         .receiveAny().thenReply("Say what?");
-
-    
 ```
 
+### Verification
+
+```java
+    // Check message "hello" was sent
+    StandIn.verify(actor).receivedEq("hello");
+    
+    // Check message of specific type was sent
+    StandIn.when(actor).receivedAny(String.class);
+
+    // Check message "hello" was sent from specififc actor 
+    StandIn.verify(actor).receivedEq("hello").from(sendingActor);
+
+    // Check any message was sent from specififc actor 
+    StandIn.verify(actor).receivedAny().from(sendingActor);
+
+    // Check message matches predicate
+    Predicate<Object> condition = msg -> msg.equals("hello");
+    StandIn.verify(actor).receivedAny(condition);
+   
+    // Check no more message not checked with verify have been received
+    StandIn.verify(actor).noMoreMessages();
+    
+    // Check no messages at all have been received
+    StandIn.verify(actor).noMessages();
+```
+
+
 Further ideas:
- * Verify functions 
- * Functions to get received messages
+ * stubbing with from(senderRef)
+ * Verify with times, throwing MessageReceivedTooOftenError 
+ * Verify with noMoreMessages / noMessages / notReceived() (NeverWantedButReceivedError etc)
+ * Functions to get received messages and unmatched messages
  * thenEcho();
  * thenThrow();
  * thenForward(otherActorRef);
  * reportUnmatched() with exception or getUnmatchedMessages()
- * verifyNoMoreInteractions 
+

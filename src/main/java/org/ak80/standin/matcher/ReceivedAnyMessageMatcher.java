@@ -10,4 +10,9 @@ public class ReceivedAnyMessageMatcher implements ReceivedMessageMatcher {
         return true;
     }
 
+    @Override
+    public String explain() {
+        return "any message";
+    }
+
 }

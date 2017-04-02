@@ -1,10 +1,9 @@
 package org.ak80.standin;
 
 import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
 import akka.testkit.JavaTestKit;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.ak80.att.akkatesttools.AkkaTest;
+import org.ak80.standin.stubbing.StubbingException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -17,22 +16,10 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 
-public class StandInTest {
+public class StandInStubbingTest extends AkkaTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
-
-    private static ActorSystem actorSystem;
-
-    @BeforeClass
-    public static void createActorSystem() {
-        actorSystem = ActorSystem.create();
-    }
-
-    @AfterClass
-    public static void shutdownActorSystem() {
-        actorSystem.shutdown();
-    }
 
     @Test
     public void define_reply_for_every_message() {
