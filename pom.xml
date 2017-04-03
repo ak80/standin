@@ -6,7 +6,7 @@
 
     <groupId>org.ak80.standin</groupId>
     <artifactId>standin-core</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,7 +15,7 @@
         <junit.version>4.12</junit.version>
         <mockito.version>2.7.11</mockito.version>
         <hamcrest.version>1.3</hamcrest.version>
-        <att.version>0.1</att.version>
+        <att.version>0.2.0</att.version>
     </properties>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -54,6 +54,12 @@
         <dependency>
             <groupId>org.ak80.att</groupId>
             <artifactId>att-akka</artifactId>
+            <version>${att.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ak80.att</groupId>
+            <artifactId>att</artifactId>
             <version>${att.version}</version>
             <scope>test</scope>
         </dependency>

@@ -11,5 +11,5 @@ public interface ReplyMessageDefinition {
      * @param receivedMessage the received message
      * @return the reply message
      */
-    Object getReplyMessage(Object receivedMessage);
+    <T extends Object> Object getReplyMessage(T receivedMessage);
 }

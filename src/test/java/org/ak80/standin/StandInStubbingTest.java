@@ -120,7 +120,7 @@ public class StandInStubbingTest extends AkkaTest {
     }
 
     @Test
-    public void define_but_actor_is_not_standin_fails() {
+    public void define_but_actor_is_not_standIn_fails() {
         // Given
         ActorRef standIn = new JavaTestKit(actorSystem).getRef();
 

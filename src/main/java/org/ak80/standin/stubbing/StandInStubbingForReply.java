@@ -48,7 +48,7 @@ public class StandInStubbingForReply {
      * @param replyFunction
      * @return stubbing to define received
      */
-    public StandInStubbingForReceives thenReplyWith(Function<Object, Object> replyFunction) {
+    public <T, R> StandInStubbingForReceives thenReplyWith(Function<T, R> replyFunction) {
         standIn.tell(new StubbingDefinition(receivedMessageMatcher, new ReplyWith(replyFunction)), ActorRef.noSender());
         return new StandInStubbingForReceives(standIn);
     }

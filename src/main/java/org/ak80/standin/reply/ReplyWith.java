@@ -7,9 +7,9 @@ import java.util.function.Function;
  */
 public class ReplyWith implements ReplyMessageDefinition {
 
-    private final Function<Object, Object> replyFunction;
+    private final Function replyFunction;
 
-    public ReplyWith(Function<Object, Object> replyFunction) {
+    public <T,R>  ReplyWith(Function<T, R> replyFunction) {
         this.replyFunction = replyFunction;
     }
 
