@@ -117,6 +117,46 @@ public class StandInVerificationTest extends AkkaTest {
         StandIn.verify(standIn).receivedAny(String.class).from(senderMock);
     }
 
+    @Test
+    public void verify_message_with_predicate_when_expected_message_was_sent_from_actor() {
+        // Given
+        ActorRef standIn = StandIn.standIn(actorSystem);
+        ActorRef senderMock = StandIn.standIn(actorSystem);
+        standIn.tell("hello", senderMock);
+
+        // When
+        StandIn.verify(standIn).received(message -> message.equals("hello")).from(senderMock);
+    }
+
+    @Test
+    public void verify_message_with_predicate_when_expected_message_was_not_sent() {
+        // Given
+        ActorRef standIn = StandIn.standIn(actorSystem);
+        standIn.tell("goodbye", ActorRef.noSender());
+
+        // expect
+        expectedException.expect(StandInAssertionError.class);
+        expectedException.expectMessage("Verification error: expected message not received by StandIn; expected a message matching a custom condition");
+
+        // When
+        StandIn.verify(standIn).received(message -> message.equals("hello"));
+    }
+
+    @Test
+    public void verify_message_with_predicate_when_expected_message_was_not_sent_from_actor() {
+        // Given
+        ActorRef standIn = StandIn.standIn(actorSystem);
+        ActorRef senderMock = StandIn.standIn(actorSystem);
+        standIn.tell("hello", ActorRef.noSender());
+
+        // expect
+        expectedException.expect(StandInAssertionError.class);
+        expectedException.expectMessage("Verification error: message was not sent from the specified Actor " + senderMock.path());
+
+        // When
+        StandIn.verify(standIn).received(message -> message.equals("hello")).from(senderMock);
+    }
+
     /*
 
     TODO

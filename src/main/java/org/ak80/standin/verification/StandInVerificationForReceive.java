@@ -5,6 +5,9 @@ import org.ak80.standin.StandIn;
 import org.ak80.standin.matcher.ReceivedAnyClassMessageMatcher;
 import org.ak80.standin.matcher.ReceivedExactMessageMatcher;
 import org.ak80.standin.matcher.ReceivedMessageMatcher;
+import org.ak80.standin.matcher.ReceivedPredicateMessageMatcher;
+
+import java.util.function.Predicate;
 
 /**
  * Fluent verification for received message
@@ -45,6 +48,18 @@ public class StandInVerificationForReceive {
      */
     public StandInVerificationForFrom receivedAny(Class<?> clazz) {
         ReceivedMessageMatcher receivedMessageMatcher = new ReceivedAnyClassMessageMatcher(clazz);
+        verify(receivedMessageMatcher);
+        return new StandInVerificationForFrom(standIn, receivedMessageMatcher);
+    }
+
+    /**
+     * Match message with condition
+     *
+     * @param condition the condition for matching
+     * @return a verification for a StandIn from
+     */
+    public StandInVerificationForFrom received(Predicate<Object> condition) {
+        ReceivedMessageMatcher receivedMessageMatcher = new ReceivedPredicateMessageMatcher(condition);
         verify(receivedMessageMatcher);
         return new StandInVerificationForFrom(standIn, receivedMessageMatcher);
     }

@@ -42,7 +42,7 @@
         <connection>scm:git:git@github.com:ak80/standin</connection>
         <developerConnection>scm:git:git@github.com:ak80/standin.git</developerConnection>
         <url>git@github.com:ak80/standin.git</url>
-        <tag>standin-${version}</tag>
+        <tag>standin-${project.version}</tag>
     </scm>
 
     <dependencies>
