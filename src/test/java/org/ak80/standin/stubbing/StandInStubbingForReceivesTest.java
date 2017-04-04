@@ -80,7 +80,6 @@ public class StandInStubbingForReceivesTest extends AkkaTest {
         assertThat(replyStubbing.thenReply(message), instanceOf(StandInStubbingForReceives.class));
     }
 
-
     @Test
     public void testVerifyStandIn_whenDefinedReplyWith_returnReceivesStubbing() {
         // Given

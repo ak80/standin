@@ -69,14 +69,15 @@ StandIn is a fluent mock framework for akka actors
     StandIn.verify(actor).noMessages();
 ```
 
-
 Further ideas:
- * stubbing with from(senderRef)
+ * stubbing with from(senderRef) like with verification
  * Verify with times, throwing MessageReceivedTooOftenError 
- * Verify with noMoreMessages / noMessages / notReceived() (NeverWantedButReceivedError etc)
+ * Verify with not().received(), throwing NeverWantedButReceivedError
+ * Verify with noMoreMessages, throwing UnverifiedMessagesError
+ * Verify with noMessagesAtAll(), throwing MessagesReceivedError
  * Functions to get received messages and unmatched messages
- * thenEcho();
- * thenThrow();
- * thenForward(otherActorRef);
- * reportUnmatched() with exception or getUnmatchedMessages()
-
+ * thenEcho()
+ * thenThrow()
+ * thenForward(otherActorRef)
+ * better error messages for verification errors
+ * increase coverage
