@@ -84,3 +84,5 @@ Further ideas:
  * thenForward(otherActorRef)
  * better error messages for verification errors
  * increase coverage
+ * getFor(standIn).from(optionalReceiver).allMessages(), message(), allMessages(exact/condition/class) dto. with messages()
+ 

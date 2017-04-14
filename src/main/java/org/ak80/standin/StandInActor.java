@@ -5,8 +5,8 @@ import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.japi.pf.ReceiveBuilder;
 import org.ak80.standin.stubbing.StubbingDefinition;
-import org.ak80.standin.verification.StandInAssertionError;
 import org.ak80.standin.verification.VerificationDefinition;
+import org.ak80.standin.verification.exception.StandInAssertionError;
 import scala.PartialFunction;
 import scala.runtime.BoxedUnit;
 

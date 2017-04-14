@@ -1,4 +1,6 @@
-package org.ak80.standin.verification;
+package org.ak80.standin.verification.exception;
+
+import org.ak80.standin.verification.StandInVerificationException;
 
 /**
  * Error to throw when verification fails

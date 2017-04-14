@@ -94,4 +94,51 @@ public class StandInStubbingForReceivesTest extends AkkaTest {
         assertThat(replyStubbing.thenReply(message), instanceOf(StandInStubbingForReceives.class));
     }
 
+    @Test
+    public void testVerifyStandIn_whenDefinedReplyEq_tellActor() {
+        // Given
+        ActorRef standIn = StandIn.standIn(actorSystem);
+        StandInStubbingForReceives standInStubbingForReceives = new StandInStubbingForReceives(standIn);
+        String input = a($String());
+        String message = a($String());
+
+        // When
+        StandInStubbingForReply replyStubbing = standInStubbingForReceives.receivesEq(input);
+        replyStubbing.thenReply(message);
+
+        // Then
+        assertThat(askReply(input, standIn), is(message));
+    }
+
+    @Test
+    public void testVerifyStandIn_whenDefinedReplCondition_tellActor() {
+        // Given
+        ActorRef standIn = StandIn.standIn(actorSystem);
+        StandInStubbingForReceives standInStubbingForReceives = new StandInStubbingForReceives(standIn);
+        String input = a($String());
+        String message = a($String());
+
+        // When
+        StandInStubbingForReply replyStubbing = standInStubbingForReceives.receives(msg -> msg.equals(input));
+        replyStubbing.thenReply(message);
+
+        // Then
+        assertThat(askReply(input, standIn), is(message));
+    }
+
+    @Test
+    public void testVerifyStandIn_whenDefinedReplyAny_tellActor() {
+        // Given
+        ActorRef standIn = StandIn.standIn(actorSystem);
+        StandInStubbingForReceives standInStubbingForReceives = new StandInStubbingForReceives(standIn);
+        String message = a($String());
+
+        // When
+        StandInStubbingForReply replyStubbing = standInStubbingForReceives.receivesAny(String.class);
+        replyStubbing.thenReply(message);
+
+        // Then
+        assertThat(askReply(a($String()), standIn), is(message));
+    }
+
 }

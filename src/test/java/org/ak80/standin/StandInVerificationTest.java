@@ -2,7 +2,7 @@ package org.ak80.standin;
 
 import akka.actor.ActorRef;
 import org.ak80.att.akkatesttools.AkkaTest;
-import org.ak80.standin.verification.StandInAssertionError;
+import org.ak80.standin.verification.exception.StandInAssertionError;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

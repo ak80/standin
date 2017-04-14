@@ -1,4 +1,4 @@
-package org.ak80.standin;
+package org.ak80.standin.verification.exception;
 
 /**
  * Exception for internal error

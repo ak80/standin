@@ -41,8 +41,7 @@ public class StandInVerification implements StandInVerificationForReceive {
 
     @Override
     public void receivedEq(Object expectedMessage) {
-        ReceivedMessageMatcher receivedMessageMatcher = new ReceivedExactMessageMatcher(expectedMessage);
-        verify(receivedMessageMatcher, once());
+        receivedEq(expectedMessage, once());
     }
 
     private void verify(ReceivedMessageMatcher receivedMessageMatcher, VerificationMode verificationMode) {

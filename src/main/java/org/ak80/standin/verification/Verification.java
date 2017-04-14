@@ -3,7 +3,7 @@ package org.ak80.standin.verification;
 import akka.actor.ActorRef;
 import org.ak80.standin.StandIn;
 import org.ak80.standin.StandInActor;
-import org.ak80.standin.StandInInternalException;
+import org.ak80.standin.verification.exception.StandInInternalException;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
