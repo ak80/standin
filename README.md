@@ -4,12 +4,15 @@
 
 StandIn is a fluent mock framework for akka actors
 
-## Ideas
+## Create a StandIn
 
 ```java
     // Create StandIn
     ActorSystem actorSystem = ActorSystem.create();
-    ActorRef actor = StandIn.standIn(actorSystem);
+    ActorRef standIn = StandIn.standIn(actorSystem);
+
+    // ... with a name
+    ActorRef standInWithName = StandIn.standIn(actorSystem,"name");
 ```
 
 ### Stubbing
