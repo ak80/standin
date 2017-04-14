@@ -6,7 +6,7 @@ import static org.ak80.att.BuilderDsl.a;
 import static org.ak80.att.ValueTdf.$Integer;
 import static org.ak80.att.ValueTdf.$String;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class ReceivedAnyClassMessageMatcherTest {
 
@@ -19,7 +19,7 @@ public class ReceivedAnyClassMessageMatcherTest {
         boolean matches = messageMatcher.matches(a($String()));
 
         // Then
-        assertThat(matches,is(true));
+        assertThat(matches, is(true));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class ReceivedAnyClassMessageMatcherTest {
         boolean matches = messageMatcher.matches(a($Integer()));
 
         // Then
-        assertThat(matches,is(false));
+        assertThat(matches, is(false));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ReceivedAnyClassMessageMatcherTest {
         String explain = messageMatcher.explain();
 
         // Then
-        assertThat(explain,is("any message of type class java.lang.String"));
+        assertThat(explain, is("any message of type class java.lang.String"));
     }
 
 }

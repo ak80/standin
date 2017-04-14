@@ -56,10 +56,10 @@ StandIn is a fluent mock framework for akka actors
     StandIn.when(actor).receivedAny(String.class);
 
     // Check message "hello" was sent from specififc actor 
-    StandIn.verify(actor).receivedEq("hello").from(sendingActor);
+    StandIn.verify(actor).from(sendingActor).receivedEq("hello");
 
     // Check any message was sent from specififc actor 
-    StandIn.verify(actor).receivedAny().from(sendingActor);
+    StandIn.verify(actor).from(sendingActor).receivedAny();
 
     // Check message matches predicate
     Predicate<Object> condition = msg -> msg.equals("hello");

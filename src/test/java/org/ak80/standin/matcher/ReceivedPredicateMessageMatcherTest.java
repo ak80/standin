@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 public class ReceivedPredicateMessageMatcherTest {
 
     private final String expectedMessage = a($String());
-    private final Predicate<Object>matcher = message -> expectedMessage.equals(message);
+    private final Predicate<Object> matcher = message -> expectedMessage.equals(message);
 
     @Test
     public void testMatch_whenSameClass_matches() {
@@ -23,7 +23,7 @@ public class ReceivedPredicateMessageMatcherTest {
         boolean matches = messageMatcher.matches(expectedMessage);
 
         // Then
-        assertThat(matches,is(true));
+        assertThat(matches, is(true));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class ReceivedPredicateMessageMatcherTest {
         boolean matches = messageMatcher.matches(a($String()));
 
         // Then
-        assertThat(matches,is(false));
+        assertThat(matches, is(false));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ReceivedPredicateMessageMatcherTest {
         String explain = messageMatcher.explain();
 
         // Then
-        assertThat(explain,is("a message matching a custom condition"));
+        assertThat(explain, is("a message matching a custom condition"));
     }
 
 }

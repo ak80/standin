@@ -11,19 +11,13 @@ import java.util.Optional;
 public class VerificationDefinition implements ReceivedMessageMatcher {
 
     private final ReceivedMessageMatcher receivedMessageMatcher;
-    private final Optional<ActorRef> senderRef;
-    private final long count;
+    private final Optional<ActorRef> receivedFrom;
+    private final VerificationMode verificationMode;
 
-    public VerificationDefinition(ReceivedMessageMatcher receivedMessageMatcher) {
+    VerificationDefinition(ReceivedMessageMatcher receivedMessageMatcher, Optional<ActorRef> receivedFrom, VerificationMode verificationMode) {
         this.receivedMessageMatcher = receivedMessageMatcher;
-        this.senderRef = Optional.empty();
-        this.count = 1;
-    }
-
-    public VerificationDefinition(ReceivedMessageMatcher receivedMessageMatcher, ActorRef senderRef) {
-        this.receivedMessageMatcher = receivedMessageMatcher;
-        this.senderRef = Optional.of(senderRef);
-        this.count = 1;
+        this.receivedFrom = receivedFrom;
+        this.verificationMode = verificationMode;
     }
 
     @Override
@@ -37,11 +31,10 @@ public class VerificationDefinition implements ReceivedMessageMatcher {
     }
 
     public Optional<ActorRef> getSenderRef() {
-        return senderRef;
+        return receivedFrom;
     }
 
-    public long getCount() {
-        return count;
+    public boolean verifyMode(long numberOfMatchedMessages) {
+        return verificationMode.verifyMode(numberOfMatchedMessages);
     }
-
 }

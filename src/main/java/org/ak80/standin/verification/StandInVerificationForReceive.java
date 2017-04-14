@@ -1,56 +1,41 @@
 package org.ak80.standin.verification;
 
-import akka.actor.ActorRef;
-import org.ak80.standin.StandIn;
-import org.ak80.standin.matcher.ReceivedAnyClassMessageMatcher;
-import org.ak80.standin.matcher.ReceivedExactMessageMatcher;
-import org.ak80.standin.matcher.ReceivedMessageMatcher;
-import org.ak80.standin.matcher.ReceivedPredicateMessageMatcher;
-
 import java.util.function.Predicate;
 
 /**
- * Fluent verification for received message
+ * Fluent verification for received message when from is already defined
  */
-public class StandInVerificationForReceive {
-
-    private final ActorRef standIn;
-    private final Verification verification = Verification.verification;
-
-    public StandInVerificationForReceive(ActorRef standIn) {
-        // TODO test verify
-        StandIn.verifyStandIn(standIn);
-        this.standIn = standIn;
-    }
+public interface StandInVerificationForReceive {
 
     /**
      * Verify the exact message was received
      *
      * @param expectedMessage the message that must be received
-     * @return a verification for a StandIn from
      */
-    public StandInVerificationForFrom receivedEq(Object expectedMessage) {
-        ReceivedMessageMatcher receivedMessageMatcher = new ReceivedExactMessageMatcher(expectedMessage);
-        verify(receivedMessageMatcher);
-        return new StandInVerificationForFrom(standIn, receivedMessageMatcher);
-    }
+    void receivedEq(Object expectedMessage);
 
-    private void verify(ReceivedMessageMatcher receivedMessageMatcher) {
-        VerificationDefinition verificationDefinition = new VerificationDefinition(receivedMessageMatcher);
-        verification.doVerificationForReceive(standIn, verificationDefinition);
-    }
+    /**
+     * Verify the exact message was received
+     *
+     * @param expectedMessage  the message that must be received
+     * @param verificationMode how many times message that must be received
+     */
+    void receivedEq(Object expectedMessage, VerificationMode verificationMode);
 
     /**
      * Match any message of a type
      *
      * @param clazz the type of message to match
-     * @return a verification for a StandIn from
      */
-    public StandInVerificationForFrom receivedAny(Class<?> clazz) {
-        ReceivedMessageMatcher receivedMessageMatcher = new ReceivedAnyClassMessageMatcher(clazz);
-        verify(receivedMessageMatcher);
-        return new StandInVerificationForFrom(standIn, receivedMessageMatcher);
-    }
+    void receivedAny(Class<?> clazz);
+
+    /**
+     * Match any message of a type
+     *
+     * @param clazz            the type of message to match
+     * @param verificationMode how many times message that must be received
+     */
+    void receivedAny(Class<?> clazz, VerificationMode verificationMode);
 
     /**
      * Match message with condition
@@ -58,10 +43,14 @@ public class StandInVerificationForReceive {
      * @param condition the condition for matching
      * @return a verification for a StandIn from
      */
-    public StandInVerificationForFrom received(Predicate<Object> condition) {
-        ReceivedMessageMatcher receivedMessageMatcher = new ReceivedPredicateMessageMatcher(condition);
-        verify(receivedMessageMatcher);
-        return new StandInVerificationForFrom(standIn, receivedMessageMatcher);
-    }
+    void received(Predicate<Object> condition);
+
+    /**
+     * Match message with condition
+     *
+     * @param condition        the condition for matching
+     * @param verificationMode how many times message that must be received
+     */
+    void received(Predicate<Object> condition, VerificationMode verificationMode);
 
 }

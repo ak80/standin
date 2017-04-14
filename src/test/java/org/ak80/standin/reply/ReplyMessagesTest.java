@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.ak80.att.BuilderDsl.a;
 import static org.ak80.att.ValueTdf.$String;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class ReplyMessagesTest {
 
@@ -16,9 +16,9 @@ public class ReplyMessagesTest {
         ReplyMessageDefinition replyMessages = new ReplyMessages(message);
 
         // When Then
-        assertThat(replyMessages.getReplyMessage(null),is(message));
-        assertThat(replyMessages.getReplyMessage(null),is(message));
-        assertThat(replyMessages.getReplyMessage(null),is(message));
+        assertThat(replyMessages.getReplyMessage(null), is(message));
+        assertThat(replyMessages.getReplyMessage(null), is(message));
+        assertThat(replyMessages.getReplyMessage(null), is(message));
     }
 
     @Test
@@ -30,12 +30,12 @@ public class ReplyMessagesTest {
         ReplyMessageDefinition replyMessages = new ReplyMessages(message0, message1, message2);
 
         // When Then
-        assertThat(replyMessages.getReplyMessage(null),is(message0));
-        assertThat(replyMessages.getReplyMessage(null),is(message1));
-        assertThat(replyMessages.getReplyMessage(null),is(message2));
-        assertThat(replyMessages.getReplyMessage(null),is(message2));
-        assertThat(replyMessages.getReplyMessage(null),is(message2));
-        assertThat(replyMessages.getReplyMessage(null),is(message2));
+        assertThat(replyMessages.getReplyMessage(null), is(message0));
+        assertThat(replyMessages.getReplyMessage(null), is(message1));
+        assertThat(replyMessages.getReplyMessage(null), is(message2));
+        assertThat(replyMessages.getReplyMessage(null), is(message2));
+        assertThat(replyMessages.getReplyMessage(null), is(message2));
+        assertThat(replyMessages.getReplyMessage(null), is(message2));
     }
 
 }

@@ -89,8 +89,8 @@ public class StandInActor extends AbstractActor {
     private void verifyMessage(VerificationDefinition verificationDefinition) {
         long numberOfMatchedMessages = getNumberOfMatchedMessages(verificationDefinition);
 
-        if (numberOfMatchedMessages != verificationDefinition.getCount()) {
-            // TODO print received messages with actor in order
+        if (verificationDefinition.verifyMode(numberOfMatchedMessages) == false) {
+            // Todo get message from mode
             failVerification(new StandInAssertionError("Verification error: expected message not received by StandIn; expected " + verificationDefinition.explain()));
         }
     }

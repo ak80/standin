@@ -8,7 +8,7 @@ public class ReplyMessages implements ReplyMessageDefinition {
     private final Object[] replyMessages;
     private int index = -1;
 
-    public ReplyMessages(Object ... replyMessages) {
+    public ReplyMessages(Object... replyMessages) {
         this.replyMessages = replyMessages;
     }
 

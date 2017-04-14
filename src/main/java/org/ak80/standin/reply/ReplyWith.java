@@ -9,7 +9,7 @@ public class ReplyWith implements ReplyMessageDefinition {
 
     private final Function replyFunction;
 
-    public <T,R>  ReplyWith(Function<T, R> replyFunction) {
+    public <T, R> ReplyWith(Function<T, R> replyFunction) {
         this.replyFunction = replyFunction;
     }
 

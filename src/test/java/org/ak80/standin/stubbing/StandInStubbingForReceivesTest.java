@@ -6,7 +6,6 @@ import org.ak80.att.akkatesttools.AkkaTest;
 import org.ak80.standin.StandIn;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.internal.runners.statements.ExpectException;
 import org.junit.rules.ExpectedException;
 
 import static org.ak80.att.BuilderDsl.a;
@@ -14,7 +13,7 @@ import static org.ak80.att.ValueTdf.$String;
 import static org.ak80.att.akkatesttools.FutureTools.askReply;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 
 public class StandInStubbingForReceivesTest extends AkkaTest {
@@ -47,7 +46,7 @@ public class StandInStubbingForReceivesTest extends AkkaTest {
         replyStubbing.thenReply(message);
 
         // Then
-        assertThat(askReply(a($String()),standIn),is(message));
+        assertThat(askReply(a($String()), standIn), is(message));
     }
 
     @Test
@@ -62,7 +61,7 @@ public class StandInStubbingForReceivesTest extends AkkaTest {
         replyStubbing.thenReplyWith((String msg) -> msg.toLowerCase());
 
         // Then
-        assertThat(askReply(message.toUpperCase(),standIn),is(message.toLowerCase()));
+        assertThat(askReply(message.toUpperCase(), standIn), is(message.toLowerCase()));
     }
 
     @Test

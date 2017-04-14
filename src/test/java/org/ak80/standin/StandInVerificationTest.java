@@ -7,9 +7,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 public class StandInVerificationTest extends AkkaTest {
 
     @Rule
@@ -73,7 +70,7 @@ public class StandInVerificationTest extends AkkaTest {
 
 
         // When Then
-        StandIn.verify(standIn).receivedEq("hello").from(senderMock);
+        StandIn.verify(standIn).from(senderMock).receivedEq("hello");
     }
 
     @Test
@@ -88,7 +85,7 @@ public class StandInVerificationTest extends AkkaTest {
         expectedException.expectMessage("Verification error: message was not sent from the specified Actor " + senderMock.path());
 
         // When
-        StandIn.verify(standIn).receivedEq("hello").from(senderMock);
+        StandIn.verify(standIn).from(senderMock).receivedEq("hello");
     }
 
     @Test
@@ -99,7 +96,7 @@ public class StandInVerificationTest extends AkkaTest {
         standIn.tell("hello", senderMock);
 
         // When Then
-        StandIn.verify(standIn).receivedAny(String.class).from(senderMock);
+        StandIn.verify(standIn).from(senderMock).receivedAny(String.class);
     }
 
     @Test
@@ -114,7 +111,7 @@ public class StandInVerificationTest extends AkkaTest {
         expectedException.expectMessage("Verification error: message was not sent from the specified Actor " + senderMock.path());
 
         // When
-        StandIn.verify(standIn).receivedAny(String.class).from(senderMock);
+        StandIn.verify(standIn).from(senderMock).receivedAny(String.class);
     }
 
     @Test
@@ -125,7 +122,7 @@ public class StandInVerificationTest extends AkkaTest {
         standIn.tell("hello", senderMock);
 
         // When
-        StandIn.verify(standIn).received(message -> message.equals("hello")).from(senderMock);
+        StandIn.verify(standIn).from(senderMock).received(message -> message.equals("hello"));
     }
 
     @Test
@@ -154,7 +151,7 @@ public class StandInVerificationTest extends AkkaTest {
         expectedException.expectMessage("Verification error: message was not sent from the specified Actor " + senderMock.path());
 
         // When
-        StandIn.verify(standIn).received(message -> message.equals("hello")).from(senderMock);
+        StandIn.verify(standIn).from(senderMock).received(message -> message.equals("hello"));
     }
 
     /*

@@ -6,7 +6,7 @@ import akka.actor.ActorSystem;
 import akka.pattern.PatternsCS;
 import org.ak80.standin.stubbing.StandInStubbingForReceives;
 import org.ak80.standin.stubbing.StubbingException;
-import org.ak80.standin.verification.StandInVerificationForReceive;
+import org.ak80.standin.verification.StandInVerification;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -30,11 +30,11 @@ public class StandIn extends AbstractActor {
      * Create a StandIn, a stub/mock Actor with a name
      *
      * @param actorSystem the actor system in which the actor is created
-     * @param name the actors name
+     * @param name        the actors name
      * @return the StandIn
      */
     public static ActorRef standIn(ActorSystem actorSystem, String name) {
-        return actorSystem.actorOf(StandInActor.create(),name);
+        return actorSystem.actorOf(StandInActor.create(), name);
     }
 
     /**
@@ -66,8 +66,8 @@ public class StandIn extends AbstractActor {
         }
     }
 
-    public static StandInVerificationForReceive verify(ActorRef standIn) {
-        return new StandInVerificationForReceive(standIn);
+    public static StandInVerification verify(ActorRef standIn) {
+        return new StandInVerification(standIn);
     }
 
 }
