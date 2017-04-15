@@ -3,21 +3,21 @@ package org.ak80.standin.matcher;
 /**
  * Matches any message with the given class
  */
-public class ReceivedAnyClassMessageMatcher implements ReceivedMessageMatcher {
+public final class ReceivedAnyClassMessageMatcher implements ReceivedMessageMatcher {
 
-    private final Class<?> clazz;
+    private final Class<?> expectedClass;
 
-    public ReceivedAnyClassMessageMatcher(Class<?> clazz) {
-        this.clazz = clazz;
+    public ReceivedAnyClassMessageMatcher(Class<?> receivedCall) {
+        this.expectedClass = receivedCall;
     }
 
     @Override
     public boolean matches(Object message) {
-        return clazz.isInstance(message);
+        return expectedClass.isInstance(message);
     }
 
     @Override
     public String explain() {
-        return "any message of type " + clazz;
+        return "any message of type " + expectedClass;
     }
 }

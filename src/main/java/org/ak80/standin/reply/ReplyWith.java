@@ -5,7 +5,7 @@ import java.util.function.Function;
 /**
  * Defines a function to generate replies
  */
-public class ReplyWith implements ReplyMessageDefinition {
+public final class ReplyWith implements ReplyMessageDefinition {
 
     private final Function replyFunction;
 

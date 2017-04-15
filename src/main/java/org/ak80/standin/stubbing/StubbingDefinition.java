@@ -6,7 +6,7 @@ import org.ak80.standin.reply.ReplyMessageDefinition;
 /**
  * Definition of stubbing combining receive and reply
  */
-public class StubbingDefinition implements ReceivedMessageMatcher {
+public final class StubbingDefinition implements ReceivedMessageMatcher {
 
     private final ReceivedMessageMatcher receivedMessageMatcher;
     private final ReplyMessageDefinition replyMessagesDefinition;

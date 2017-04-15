@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * A received message with sender actor
  */
-public class ReceivedMessage {
+public final class ReceivedMessage {
 
     private final Object message;
     private final ActorRef sender;

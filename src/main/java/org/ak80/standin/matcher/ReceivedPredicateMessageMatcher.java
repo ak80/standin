@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 /**
  * Defines a received message match with a condition
  */
-public class ReceivedPredicateMessageMatcher implements ReceivedMessageMatcher {
+public final class ReceivedPredicateMessageMatcher implements ReceivedMessageMatcher {
 
     private final Predicate<Object> condition;
 

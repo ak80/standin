@@ -15,7 +15,7 @@ import java.util.function.Predicate;
  * The order of defining the receives is important, first match wins
  * </p>
  */
-public class StandInStubbingForReceives {
+public final class StandInStubbingForReceives {
 
     private final ActorRef standIn;
     private ReceivedMessageMatcher receivedMessageMatcher;

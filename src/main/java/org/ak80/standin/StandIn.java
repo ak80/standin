@@ -17,6 +17,13 @@ import java.util.concurrent.ExecutionException;
 public class StandIn extends AbstractActor {
 
     /**
+     * Default wait time for waiting for actor reply
+     */
+    public static final long DEFAULT_WAIT = 1000;
+
+    private static final long BIGGER_COUNT = 100L;
+
+    /**
      * Create a standIn, a stub/mock Actor
      *
      * @param actorSystem the actor system in which the actor is created
@@ -52,7 +59,7 @@ public class StandIn extends AbstractActor {
      * @param standIn the stand in to check
      */
     public static void verifyStandIn(ActorRef standIn) {
-        CompletableFuture future = (CompletableFuture) PatternsCS.ask(standIn, new StandInActor.IdentifyMessage(), 1000L);
+        CompletableFuture future = (CompletableFuture) PatternsCS.ask(standIn, new StandInActor.IdentifyMessage(), BIGGER_COUNT);
         if (!replyIsStandIn(future)) {
             throw new StubbingException("The ActorRef is not for a StandIn");
         }

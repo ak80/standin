@@ -8,14 +8,14 @@ import org.ak80.standin.verification.exception.StandInInternalException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+import static org.ak80.standin.StandIn.DEFAULT_WAIT;
+
 /**
  * Send and receive VerificationDefinition to the StandIn
  * <p>
  * TODO test coverage
  */
 class Verification {
-
-    public static Verification verification = new Verification();
 
     public void doVerificationForReceive(ActorRef standIn, VerificationDefinition verificationDefinition) {
         // TODO test verify
@@ -38,7 +38,7 @@ class Verification {
         CompletableFuture future = (CompletableFuture) akka.pattern.PatternsCS.ask(
                 standIn,
                 verificationDefinition,
-                1000);
+                DEFAULT_WAIT);
         return getReply(future);
     }
 
@@ -46,7 +46,7 @@ class Verification {
         try {
             return future.get();
         } catch (InterruptedException | ExecutionException e) {
-            throw new StandInInternalException("Internal error while getting reply from StandIn: " + e.getMessage());
+            throw new StandInInternalException(e);
         }
     }
 

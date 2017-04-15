@@ -70,7 +70,7 @@ public class StubbingDefinitionTest {
     }
 
     private ReplyMessages getReplyMessages(String replyMessage) {
-        return new TestingReplyMessages(replyMessage);
+        return new ReplyMessages(replyMessage);
     }
 
     private class TestingReceivedExactMessageMatcher implements ReceivedMessageMatcher {
@@ -89,15 +89,6 @@ public class StubbingDefinitionTest {
         public String explain() {
             return "i will match " + expectedMessage.toString();
         }
-    }
-
-    private class TestingReplyMessages extends ReplyMessages {
-
-        public TestingReplyMessages(String replyMessage) {
-            super(replyMessage);
-        }
-
-
     }
 
 

@@ -15,9 +15,9 @@ import static org.ak80.standin.verification.Times.once;
 /**
  * Fluent definition of verification
  */
-public class StandInVerification implements StandInVerificationForReceive {
+public final class StandInVerification implements StandInVerificationForReceive {
 
-    private final Verification verification = Verification.verification;
+    private final Verification verification = new Verification();
     private final ActorRef standIn;
     private Optional<ActorRef> receivedFrom = Optional.empty();
 

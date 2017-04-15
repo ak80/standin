@@ -17,7 +17,7 @@ import java.util.function.Function;
  * The order of defining the receives is important, first match wins
  * </p>
  */
-public class StandInStubbingForReply {
+public final class StandInStubbingForReply {
 
     private final ActorRef standIn;
     private final ReceivedMessageMatcher receivedMessageMatcher;
