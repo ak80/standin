@@ -22,7 +22,6 @@ public class StandInVerification implements StandInVerificationForReceive {
     private Optional<ActorRef> receivedFrom = Optional.empty();
 
     public StandInVerification(ActorRef standIn) {
-        // TODO test verify
         StandIn.verifyStandIn(standIn);
         this.standIn = standIn;
     }

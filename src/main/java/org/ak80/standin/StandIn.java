@@ -12,23 +12,22 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 /**
- * StandIn - static functions to create a StandIn and define stubbing and verification
- * // TODO test coverage
+ * StandIn - static functions to create a standIn and define stubbing and verification
  */
 public class StandIn extends AbstractActor {
 
     /**
-     * Create a StandIn, a stub/mock Actor
+     * Create a standIn, a stub/mock Actor
      *
      * @param actorSystem the actor system in which the actor is created
-     * @return the StandIn
+     * @return the standIn
      */
     public static ActorRef standIn(ActorSystem actorSystem) {
         return actorSystem.actorOf(StandInActor.create());
     }
 
     /**
-     * Create a StandIn, a stub/mock Actor with a name
+     * Create a standIn with a name
      *
      * @param actorSystem the actor system in which the actor is created
      * @param name        the actors name
