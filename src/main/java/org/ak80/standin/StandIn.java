@@ -48,7 +48,7 @@ public class StandIn extends AbstractActor {
     }
 
     /**
-     * Check that the actor is a stand in - or throw an exception
+     * Check that the actor is a standIn - or throw an exception
      *
      * @param standIn the stand in to check
      */
