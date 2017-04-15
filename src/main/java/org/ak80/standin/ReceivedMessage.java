@@ -32,7 +32,7 @@ public class ReceivedMessage {
 
     @Override
     public final boolean equals(Object object) {
-        if(object == null || !getClass().isInstance(object)) {
+        if (object == null || !getClass().isInstance(object)) {
             return false;
         }
         ReceivedMessage other = (ReceivedMessage) object;

@@ -7,43 +7,43 @@ StandIn is a fluent mock framework for akka actors
 ## Create a StandIn
 
 ```java
-    // Create StandIn
-    ActorSystem actorSystem = ActorSystem.create();
-    ActorRef standIn = StandIn.standIn(actorSystem);
+// Create StandIn
+ActorSystem actorSystem = ActorSystem.create();
+ActorRef standIn = StandIn.standIn(actorSystem);
 
-    // ... with a name
-    ActorRef standInWithName = StandIn.standIn(actorSystem,"name");
+// ... with a name
+ActorRef standInWithName = StandIn.standIn(actorSystem,"name");
 ```
 
 ### Stubbing
 
 ```java
-    // Define reply for every message that is received
-    StandIn.when(actor).receivesAny().thenReply("You said hello");
+// Define reply for every message that is received
+StandIn.when(actor).receivesAny().thenReply("You said hello");
 
-    // Define reply when exact message is received
-    StandIn.when(actor).receivesEq("hello").thenReply("You said hello");
+// Define reply when exact message is received
+StandIn.when(actor).receivesEq("hello").thenReply("You said hello");
 
-    // Define reply when message of a class is received
-    StandIn.when(actor).receivesAny(String.class).thenReply("You send me a String");
+// Define reply when message of a class is received
+StandIn.when(actor).receivesAny(String.class).thenReply("You send me a String");
 
-    // Define reply when received message matches a predicate
-    Predicate<Object> condition = msg -> msg.equals("hello");
-    StandIn.when(standIn).receives(condition).thenReply("You said hello");
+// Define reply when received message matches a predicate
+Predicate<Object> condition = msg -> msg.equals("hello");
+StandIn.when(standIn).receives(condition).thenReply("You said hello");
 
-    // Define multiple replies, combine with any of the receive* definitions
-    StandIn.when(actor).receivesEq("hello").thenReply("You said hello","Hello Again", "I refuse to say more hello");
-    
-    // Define reply through function
-    Function<Object,Object> replyFunction = msg -> msg.toString();
-    StandIn.when(actor).receivesEq("hello").thenReplyWith(replyFunction);
-    
-    // combine the stubbings, first stubbing wins
-    StandIn.when(actor)
-        .receivesEq("hello").thenReply("You said hello")
-        .receivesEq("goodbye").thenReply("You said goodbye")
-        .receivesAny(String.class).thenReply("You said something")
-        .receiveAny().thenReply("Say what?");
+// Define multiple replies, combine with any of the receive* definitions
+StandIn.when(actor).receivesEq("hello").thenReply("You said hello","Hello Again", "I refuse to say more hello");
+
+// Define reply through function
+Function<Object,Object> replyFunction = msg -> msg.toString();
+StandIn.when(actor).receivesEq("hello").thenReplyWith(replyFunction);
+
+// combine the stubbings, first stubbing wins
+StandIn.when(actor)
+    .receivesEq("hello").thenReply("You said hello")
+    .receivesEq("goodbye").thenReply("You said goodbye")
+    .receivesAny(String.class).thenReply("You said something")
+    .receiveAny().thenReply("Say what?");
 ```
 
 ### Verification
@@ -51,45 +51,45 @@ StandIn is a fluent mock framework for akka actors
 Verify message received
 
 ```java
-    // Check message "hello" was received
-    StandIn.verify(actor).receivedEq("hello");
-    
-    // Check message of specific type was received
-    StandIn.when(actor).receivedAny(String.class);
-    
-    // Check message matches predicate
-    Predicate<Object> condition = msg -> msg.equals("hello");
-    StandIn.verify(actor).received(condition);
+// Check message "hello" was received
+StandIn.verify(actor).receivedEq("hello");
+
+// Check message of specific type was received
+StandIn.when(actor).receivedAny(String.class);
+
+// Check message matches predicate
+Predicate<Object> condition = msg -> msg.equals("hello");
+StandIn.verify(actor).received(condition);
 ```
 
 Verify message received from actor
 
 ```java
-    // Check message "hello" was received from specififc actor 
-    StandIn.verify(actor).from(sendingActor).receivedEq("hello");
+// Check message "hello" was received from specififc actor 
+StandIn.verify(actor).from(sendingActor).receivedEq("hello");
 
-    // Check any message was received from specififc actor 
-    StandIn.verify(actor).from(sendingActor).receivedAny();
+// Check any message was received from specififc actor 
+StandIn.verify(actor).from(sendingActor).receivedAny();
+
+// .. and so on
     
-    // .. and so on
-        
 ```
 
 Veriy messages have been received an exact number of times
 ```java
-    // Check message "hello" was never received
-    StandIn.verify(actor).receivedEq("hello", never());
-    
-    // Check message "hello" was received exactly once (default)
-    StandIn.verify(actor).receivedEq("hello", once());
-    
-    // Check message "hello" was received exactly 5 times
-    StandIn.verify(actor).receivedEq("hello", times(5));
-    
-    // Check message "hello" was received exactly 5 times from specific actor
-    StandIn.verify(actor).from(sendingActor).receivedEq("hello", times(5));
-    
-    // ... and so on
+// Check message "hello" was never received
+StandIn.verify(actor).receivedEq("hello", never());
+
+// Check message "hello" was received exactly once (default)
+StandIn.verify(actor).receivedEq("hello", once());
+
+// Check message "hello" was received exactly 5 times
+StandIn.verify(actor).receivedEq("hello", times(5));
+
+// Check message "hello" was received exactly 5 times from specific actor
+StandIn.verify(actor).from(sendingActor).receivedEq("hello", times(5));
+
+// ... and so on
 ```
  
 Further ideas:

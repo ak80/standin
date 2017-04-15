@@ -29,7 +29,6 @@ public class VerificationDefinition implements ReceivedMessageMatcher<ReceivedMe
         return messageMatches && senderMatches;
     }
 
-    // TODO test explain? coverag?
     @Override
     public String explain() {
         String expectedSender = getSenderRef().isPresent() ? " from " + getSenderRef().get().path().toString() : " from any Actor";
