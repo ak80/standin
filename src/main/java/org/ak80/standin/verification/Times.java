@@ -6,24 +6,26 @@ import org.ak80.standin.verification.exception.*;
 import java.util.List;
 
 /**
- * Define optionally how often a message is expected to be received
+ * Define optionally how often a message is wanted to be received
  */
 public class Times implements VerificationMode {
 
     public static final String MATCHED = " [*matched*]";
     public static final String MATCHED_TOO_OFTEN = " [*matched too often*]";
 
-    private final long wantedNumberOfMessages;
-    private long matchedMessagesCount;
+    private final long numberOfWantedMessages;
+    private long numberOfMatchedMessages;
 
     /**
-     * Define how many times a message is expected to be received
+     * Define how many times a message is wanted to be received
      *
-     * @param wantedNumberOfMessages number of expected messages
+     * @param numberOfWantedMessages number of wanted messages
      */
-    Times(long wantedNumberOfMessages) {
-        // TODO throw exception when negative
-        this.wantedNumberOfMessages = wantedNumberOfMessages;
+    Times(long numberOfWantedMessages) {
+        if(numberOfWantedMessages < 0) {
+            throw new IllegalArgumentException("the wanted number of messages must not be negative, the given value was "+numberOfWantedMessages);
+        }
+        this.numberOfWantedMessages = numberOfWantedMessages;
     }
 
     public static Times never() {
@@ -109,7 +111,7 @@ public class Times implements VerificationMode {
             return "";
         }
         StringBuilder prettyPrinted = new StringBuilder("\nReceived messages:\n");
-        matchedMessagesCount = 0;
+        numberOfMatchedMessages = 0;
         receivedMessages.forEach(receivedMessage -> prettyPrinted.append(printReceivedMessage(receivedMessage, matchedMessages)));
         return prettyPrinted.toString();
     }
@@ -120,8 +122,8 @@ public class Times implements VerificationMode {
 
     private String printMatched(ReceivedMessage receivedMessage, List<ReceivedMessage> matchedMessages) {
         if (matchedMessages.contains(receivedMessage)) {
-            matchedMessagesCount = matchedMessagesCount + 1;
-            if (matchedMessagesCount <= getNumberOfWantedMessages()) {
+            numberOfMatchedMessages = numberOfMatchedMessages + 1;
+            if (numberOfMatchedMessages <= getNumberOfWantedMessages()) {
                 return MATCHED;
             } else {
                 return MATCHED_TOO_OFTEN;
@@ -148,10 +150,10 @@ public class Times implements VerificationMode {
     }
 
     public long getNumberOfWantedMessages() {
-        return wantedNumberOfMessages;
+        return numberOfWantedMessages;
     }
 
     public boolean is(Times times) {
-        return wantedNumberOfMessages == times.getNumberOfWantedMessages();
+        return numberOfWantedMessages == times.getNumberOfWantedMessages();
     }
 }

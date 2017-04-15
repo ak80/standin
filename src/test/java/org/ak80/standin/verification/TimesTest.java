@@ -498,5 +498,24 @@ public class TimesTest {
         assertThat(prettyPrint, is(expectedString.toString()));
     }
 
+    @Test
+    public void testNegative() {
+        // Expect
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("the wanted number of messages must not be negative, the given value was -1");
+
+        // When
+        times(-1);
+    }
+
+    @Test
+    public void testNegativeBigger() {
+        // Expect
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("the wanted number of messages must not be negative, the given value was -50");
+
+        // When
+        times(-50);
+    }
 
 }
