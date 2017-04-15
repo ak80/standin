@@ -22,19 +22,6 @@ public class StandInStubbingForReceivesTest extends AkkaTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @Test
-    public void testVerifyStandIn_whenNotStandIn_exception() {
-        // Given
-        ActorRef standIn = new JavaTestKit(actorSystem).getRef();
-
-        // Expect
-        expectedException.expect(StubbingException.class);
-        expectedException.expectMessage("The ActorRef is not for a StandIn");
-
-        // When
-        new StandInStubbingForReceives(standIn);
-    }
-
-    @Test
     public void testVerifyStandIn_whenDefinedReply_tellActor() {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);

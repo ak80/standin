@@ -119,17 +119,5 @@ public class StandInStubbingTest extends AkkaTest {
         assertThat(askReply(Integer.valueOf(1), standIn), is("Say what?"));
     }
 
-    @Test
-    public void define_but_actor_is_not_standIn_fails() {
-        // Given
-        ActorRef standIn = new JavaTestKit(actorSystem).getRef();
-
-        // Expect
-        expectedException.expect(StubbingException.class);
-        expectedException.expectMessage("The ActorRef is not for a StandIn");
-
-        // When
-        StandIn.when(standIn).receivesAny().thenReply("You said hello");
-    }
 
 }
