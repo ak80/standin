@@ -23,7 +23,7 @@ public class ReceivedMessage {
         return receivedFrom;
     }
 
-    // TODO Test this class
+    // TODO Test this class/ coverage
     @Override
     public String toString() {
         return String.format("message >%s< from %s", getMessage(), getReceivedFrom());
