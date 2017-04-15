@@ -5,19 +5,19 @@ package org.ak80.standin.reply;
  */
 public final class ReplyMessages implements ReplyMessageDefinition {
 
-    private final Object[] replyMessages;
+    private final Object[] definedMessages;
     private int index = -1;
 
-    public ReplyMessages(Object... replyMessages) {
-        this.replyMessages = replyMessages;
+    public ReplyMessages(Object... definedMessages) {
+        this.definedMessages = definedMessages;
     }
 
     @Override
     public Object getReplyMessage(Object receivedMessage) {
         index = index + 1;
-        if (index == replyMessages.length) {
-            index = replyMessages.length - 1;
+        if (index == definedMessages.length) {
+            index = definedMessages.length - 1;
         }
-        return replyMessages[index];
+        return definedMessages[index];
     }
 }

@@ -20,12 +20,12 @@ import java.util.function.Function;
 public final class StandInStubbingForReply {
 
     private final ActorRef standIn;
-    private final ReceivedMessageMatcher receivedMessageMatcher;
+    private final ReceivedMessageMatcher messageMatcher;
 
     public StandInStubbingForReply(ActorRef standIn, ReceivedMessageMatcher receivedMessageMatcher) {
         StandIn.verifyStandIn(standIn);
         this.standIn = standIn;
-        this.receivedMessageMatcher = receivedMessageMatcher;
+        this.messageMatcher = receivedMessageMatcher;
     }
 
     /**
@@ -38,7 +38,7 @@ public final class StandInStubbingForReply {
      * @return this
      */
     public StandInStubbingForReceives thenReply(Object... replyMessages) {
-        standIn.tell(new StubbingDefinition(receivedMessageMatcher, new ReplyMessages(replyMessages)), ActorRef.noSender());
+        standIn.tell(new StubbingDefinition(messageMatcher, new ReplyMessages(replyMessages)), ActorRef.noSender());
         return new StandInStubbingForReceives(standIn);
     }
 
@@ -49,7 +49,7 @@ public final class StandInStubbingForReply {
      * @return stubbing to define received
      */
     public <T, R> StandInStubbingForReceives thenReplyWith(Function<T, R> replyFunction) {
-        standIn.tell(new StubbingDefinition(receivedMessageMatcher, new ReplyWith(replyFunction)), ActorRef.noSender());
+        standIn.tell(new StubbingDefinition(messageMatcher, new ReplyWith(replyFunction)), ActorRef.noSender());
         return new StandInStubbingForReceives(standIn);
     }
 

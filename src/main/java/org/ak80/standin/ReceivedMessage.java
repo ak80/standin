@@ -31,8 +31,8 @@ public final class ReceivedMessage {
     }
 
     @Override
-    public final boolean equals(Object object) {
-        if (object == null || !getClass().isInstance(object)) {
+    public boolean equals(Object object) {
+        if (object == null || !this.getClass().isInstance(object)) {
             return false;
         }
         ReceivedMessage other = (ReceivedMessage) object;
@@ -42,7 +42,7 @@ public final class ReceivedMessage {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         return Objects.hash(message, sender);
     }
 

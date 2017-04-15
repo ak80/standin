@@ -43,15 +43,15 @@ public final class StandInVerification implements StandInVerificationForReceive 
         receivedEq(expectedMessage, once());
     }
 
-    public void verify(ReceivedMessageMatcher receivedMessageMatcher, VerificationMode verificationMode) {
-        VerificationDefinition verificationDefinition = new VerificationDefinition(receivedMessageMatcher, receivedFrom, verificationMode);
+    public void verify(ReceivedMessageMatcher messageMatcher, VerificationMode verificationMode) {
+        VerificationDefinition verificationDefinition = new VerificationDefinition(messageMatcher, receivedFrom, verificationMode);
         verification.doVerificationForReceive(standIn, verificationDefinition);
     }
 
     @Override
     public void receivedEq(Object expectedMessage, VerificationMode verificationMode) {
-        ReceivedMessageMatcher receivedMessageMatcher = new ReceivedExactMessageMatcher(expectedMessage);
-        verify(receivedMessageMatcher, verificationMode);
+        ReceivedMessageMatcher messageMatcher = new ReceivedExactMessageMatcher(expectedMessage);
+        verify(messageMatcher, verificationMode);
     }
 
     @Override
@@ -61,8 +61,8 @@ public final class StandInVerification implements StandInVerificationForReceive 
 
     @Override
     public void receivedAny(Class<?> clazz, VerificationMode verificationMode) {
-        ReceivedMessageMatcher receivedMessageMatcher = new ReceivedAnyClassMessageMatcher(clazz);
-        verify(receivedMessageMatcher, verificationMode);
+        ReceivedMessageMatcher messageMatcher = new ReceivedAnyClassMessageMatcher(clazz);
+        verify(messageMatcher, verificationMode);
     }
 
     @Override
@@ -72,8 +72,8 @@ public final class StandInVerification implements StandInVerificationForReceive 
 
     @Override
     public void received(Predicate<Object> condition, VerificationMode verificationMode) {
-        ReceivedMessageMatcher receivedMessageMatcher = new ReceivedPredicateMessageMatcher(condition);
-        verify(receivedMessageMatcher, verificationMode);
+        ReceivedMessageMatcher messageMatcher = new ReceivedPredicateMessageMatcher(condition);
+        verify(messageMatcher, verificationMode);
     }
 
 }

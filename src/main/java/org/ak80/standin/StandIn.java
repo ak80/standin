@@ -14,7 +14,11 @@ import java.util.concurrent.ExecutionException;
 /**
  * StandIn - static functions to create a standIn and define stubbing and verification
  */
-public class StandIn extends AbstractActor {
+public abstract class StandIn extends AbstractActor {
+
+    private StandIn() {
+        // singleton - all methods static
+    }
 
     /**
      * Default wait time for waiting for actor reply

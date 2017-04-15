@@ -18,7 +18,7 @@ import java.util.function.Predicate;
 public final class StandInStubbingForReceives {
 
     private final ActorRef standIn;
-    private ReceivedMessageMatcher receivedMessageMatcher;
+    private ReceivedMessageMatcher messageMatcher;
 
     public StandInStubbingForReceives(ActorRef standIn) {
         StandIn.verifyStandIn(standIn);
@@ -31,8 +31,8 @@ public final class StandInStubbingForReceives {
      * @return stubbing for reply
      */
     public StandInStubbingForReply receivesAny() {
-        receivedMessageMatcher = new ReceivedAnyMessageMatcher();
-        return new StandInStubbingForReply(standIn, receivedMessageMatcher);
+        messageMatcher = new ReceivedAnyMessageMatcher();
+        return new StandInStubbingForReply(standIn, messageMatcher);
     }
 
 
@@ -44,8 +44,8 @@ public final class StandInStubbingForReceives {
      */
 
     public StandInStubbingForReply receivesEq(Object exactMessage) {
-        receivedMessageMatcher = new ReceivedExactMessageMatcher(exactMessage);
-        return new StandInStubbingForReply(standIn, receivedMessageMatcher);
+        messageMatcher = new ReceivedExactMessageMatcher(exactMessage);
+        return new StandInStubbingForReply(standIn, messageMatcher);
     }
 
     /**
@@ -55,8 +55,8 @@ public final class StandInStubbingForReceives {
      * @return stubbing for reply
      */
     public StandInStubbingForReply receives(Predicate<Object> condition) {
-        receivedMessageMatcher = new ReceivedPredicateMessageMatcher(condition);
-        return new StandInStubbingForReply(standIn, receivedMessageMatcher);
+        messageMatcher = new ReceivedPredicateMessageMatcher(condition);
+        return new StandInStubbingForReply(standIn, messageMatcher);
     }
 
     /**
@@ -66,8 +66,8 @@ public final class StandInStubbingForReceives {
      * @return this
      */
     public StandInStubbingForReply receivesAny(Class<?> clazz) {
-        receivedMessageMatcher = new ReceivedAnyClassMessageMatcher(clazz);
-        return new StandInStubbingForReply(standIn, receivedMessageMatcher);
+        messageMatcher = new ReceivedAnyClassMessageMatcher(clazz);
+        return new StandInStubbingForReply(standIn, messageMatcher);
     }
 
 }

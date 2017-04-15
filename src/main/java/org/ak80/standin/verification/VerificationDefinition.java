@@ -10,7 +10,7 @@ import java.util.Optional;
  * Definition of verification combining receive and sender
  * // TODO test
  */
-public class VerificationDefinition implements ReceivedMessageMatcher<ReceivedMessage> {
+public final class VerificationDefinition implements ReceivedMessageMatcher<ReceivedMessage> {
 
     private final ReceivedMessageMatcher receivedMessageMatcher;
     private final Optional<ActorRef> receivedFrom;
@@ -25,18 +25,14 @@ public class VerificationDefinition implements ReceivedMessageMatcher<ReceivedMe
     @Override
     public boolean matches(ReceivedMessage message) {
         boolean messageMatches = receivedMessageMatcher.matches(message.getMessage());
-        boolean senderMatches = getSenderRef().isPresent() ? getSenderRef().get().equals(message.getSender()) : true;
+        boolean senderMatches = receivedFrom.isPresent() ? receivedFrom.get().equals(message.getSender()) : true;
         return messageMatches && senderMatches;
     }
 
     @Override
     public String explain() {
-        String expectedSender = getSenderRef().isPresent() ? " from " + getSenderRef().get().path().toString() : " from any Actor";
+        String expectedSender = receivedFrom.isPresent() ? " from " + receivedFrom.get().path().toString() : " from any Actor";
         return receivedMessageMatcher.explain() + expectedSender;
-    }
-
-    public Optional<ActorRef> getSenderRef() {
-        return receivedFrom;
     }
 
     public void verifyMode(List<ReceivedMessage> matchedMessages, List<ReceivedMessage> receivedMessages) {

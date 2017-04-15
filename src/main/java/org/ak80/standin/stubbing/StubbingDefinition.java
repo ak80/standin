@@ -8,25 +8,25 @@ import org.ak80.standin.reply.ReplyMessageDefinition;
  */
 public final class StubbingDefinition implements ReceivedMessageMatcher {
 
-    private final ReceivedMessageMatcher receivedMessageMatcher;
-    private final ReplyMessageDefinition replyMessagesDefinition;
+    private final ReceivedMessageMatcher messageMatcher;
+    private final ReplyMessageDefinition replyDefinition;
 
-    public StubbingDefinition(ReceivedMessageMatcher receivedMessageMatcher, ReplyMessageDefinition replyMessagesDefinition) {
-        this.receivedMessageMatcher = receivedMessageMatcher;
-        this.replyMessagesDefinition = replyMessagesDefinition;
+    public StubbingDefinition(ReceivedMessageMatcher messageMatcher, ReplyMessageDefinition replyDefinition) {
+        this.messageMatcher = messageMatcher;
+        this.replyDefinition = replyDefinition;
     }
 
     @Override
     public boolean matches(Object message) {
-        return receivedMessageMatcher.matches(message);
+        return messageMatcher.matches(message);
     }
 
     @Override
     public String explain() {
-        return receivedMessageMatcher.explain();
+        return messageMatcher.explain();
     }
 
     public Object getReplyMessage(Object receivedMessage) {
-        return replyMessagesDefinition.getReplyMessage(receivedMessage);
+        return replyDefinition.getReplyMessage(receivedMessage);
     }
 }
