@@ -16,6 +16,9 @@ import java.util.concurrent.ExecutionException;
  */
 public abstract class StandIn extends AbstractActor {
 
+    /**
+     * do not allow instantiation, this is a interface class with static methods
+     */
     private StandIn() {
         // singleton - all methods static
     }

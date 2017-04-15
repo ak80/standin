@@ -35,6 +35,16 @@ public final class StandInStubbingForReceives {
         return new StandInStubbingForReply(standIn, messageMatcher);
     }
 
+    /**
+     * Return the reply when message is instance of the class
+     *
+     * @param clazz the class to match instances of
+     * @return this
+     */
+    public StandInStubbingForReply receivesAny(Class<?> clazz) {
+        messageMatcher = new ReceivedAnyClassMessageMatcher(clazz);
+        return new StandInStubbingForReply(standIn, messageMatcher);
+    }
 
     /**
      * Return the reply when message is equal
@@ -56,17 +66,6 @@ public final class StandInStubbingForReceives {
      */
     public StandInStubbingForReply receives(Predicate<Object> condition) {
         messageMatcher = new ReceivedPredicateMessageMatcher(condition);
-        return new StandInStubbingForReply(standIn, messageMatcher);
-    }
-
-    /**
-     * Return the reply when message is instance of the class
-     *
-     * @param clazz the class to match instances of
-     * @return this
-     */
-    public StandInStubbingForReply receivesAny(Class<?> clazz) {
-        messageMatcher = new ReceivedAnyClassMessageMatcher(clazz);
         return new StandInStubbingForReply(standIn, messageMatcher);
     }
 

@@ -119,5 +119,4 @@ public class StandInStubbingTest extends AkkaTest {
         assertThat(askReply(Integer.valueOf(1), standIn), is("Say what?"));
     }
 
-
 }

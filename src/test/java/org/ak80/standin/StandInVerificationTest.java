@@ -176,9 +176,9 @@ public class StandInVerificationTest extends AkkaTest {
         // expect
         expectedException.expect(MessageNotReceivedError.class);
         expectedException.expectMessage("Verification error:\n" +
-                "    expected message not received, expected a message equal to >goodbye< from any Actor\n" +
-                "Received messages:\n" +
-                "    message >hello< from Actor[akka://default/deadLetters]");
+                "    expected message not received, expected a message equal to >goodbye< from any Actor\n"
+                + "Received messages:\n"
+                + "    message >hello< from Actor[akka://default/deadLetters]");
 
         // When
         StandIn.verify(standIn).receivedEq("goodbye");

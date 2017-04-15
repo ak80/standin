@@ -22,7 +22,7 @@ public class TimesTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    private final static String EXPLANATION = "a message that matched " + a($ReceivedMessage());
+    private static final String EXPLANATION = "a message that matched " + a($ReceivedMessage());
 
     @Test
     public void testNever() {
