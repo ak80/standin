@@ -44,7 +44,7 @@ public class StandInVerification implements StandInVerificationForReceive {
         receivedEq(expectedMessage, once());
     }
 
-    private void verify(ReceivedMessageMatcher receivedMessageMatcher, VerificationMode verificationMode) {
+    public void verify(ReceivedMessageMatcher receivedMessageMatcher, VerificationMode verificationMode) {
         VerificationDefinition verificationDefinition = new VerificationDefinition(receivedMessageMatcher, receivedFrom, verificationMode);
         verification.doVerificationForReceive(standIn, verificationDefinition);
     }

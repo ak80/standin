@@ -44,7 +44,7 @@ public class ReceivedExactMessageMatcherTest {
         String explain = messageMatcher.explain();
 
         // Then
-        assertThat(explain, is("a message equal to \"" + expectedMessage + "\""));
+        assertThat(explain, is("a message equal to >" + expectedMessage + "<"));
     }
 
 }

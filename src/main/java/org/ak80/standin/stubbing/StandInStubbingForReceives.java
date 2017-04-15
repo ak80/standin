@@ -9,8 +9,8 @@ import java.util.function.Predicate;
 /**
  * Fluent stubbing for a StandIn to define receives
  * <p>
- * Uses receive methods to define what how to match incoming messages and
- * thenReply methods to define what is sent back.
+ * Uses "receive" methods to define what how to match incoming messages and
+ * "thenReply" methods to define what is sent back.
  * <p>
  * The order of defining the receives is important, first match wins
  * </p>

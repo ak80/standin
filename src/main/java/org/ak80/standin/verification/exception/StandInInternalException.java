@@ -5,8 +5,8 @@ package org.ak80.standin.verification.exception;
  */
 public class StandInInternalException extends RuntimeException {
 
-    public StandInInternalException(String message) {
-        super(message);
+    public StandInInternalException(String errorMessage) {
+        super(errorMessage);
     }
 
 }

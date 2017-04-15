@@ -10,6 +10,8 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * Send and receive VerificationDefinition to the StandIn
+ * <p>
+ * TODO test coverage
  */
 class Verification {
 

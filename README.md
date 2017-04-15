@@ -48,41 +48,58 @@ StandIn is a fluent mock framework for akka actors
 
 ### Verification
 
+Verify message received
+
 ```java
-    // Check message "hello" was sent
+    // Check message "hello" was received
     StandIn.verify(actor).receivedEq("hello");
     
-    // Check message of specific type was sent
+    // Check message of specific type was received
     StandIn.when(actor).receivedAny(String.class);
-
-    // Check message "hello" was sent from specififc actor 
-    StandIn.verify(actor).from(sendingActor).receivedEq("hello");
-
-    // Check any message was sent from specififc actor 
-    StandIn.verify(actor).from(sendingActor).receivedAny();
-
+    
     // Check message matches predicate
     Predicate<Object> condition = msg -> msg.equals("hello");
     StandIn.verify(actor).received(condition);
-   
-    // Check no more message not checked with verify have been received
-    StandIn.verify(actor).noMoreMessages();
-    
-    // Check no messages at all have been received
-    StandIn.verify(actor).noMessages();
 ```
 
+Verify message received from actor
+
+```java
+    // Check message "hello" was received from specififc actor 
+    StandIn.verify(actor).from(sendingActor).receivedEq("hello");
+
+    // Check any message was received from specififc actor 
+    StandIn.verify(actor).from(sendingActor).receivedAny();
+    
+    // .. and so on
+        
+```
+
+Veriy messages have been received an exact number of times
+```java
+    // Check message "hello" was never received
+    StandIn.verify(actor).receivedEq("hello", never());
+    
+    // Check message "hello" was received exactly once (default)
+    StandIn.verify(actor).receivedEq("hello", once());
+    
+    // Check message "hello" was received exactly 5 times
+    StandIn.verify(actor).receivedEq("hello", times(5));
+    
+    // Check message "hello" was received exactly 5 times from specific actor
+    StandIn.verify(actor).from(sendingActor).receivedEq("hello", times(5));
+    
+    // ... and so on
+```
+ 
 Further ideas:
  * stubbing with from(senderRef) like with verification
- * Verify with times, throwing MessageReceivedTooOftenError 
- * Verify with not().received(), throwing NeverWantedButReceivedError
  * Verify with noMoreMessages, throwing UnverifiedMessagesError
- * Verify with noMessagesAtAll(), throwing MessagesReceivedError
- * Functions to get received messages and unmatched messages
+ * Verify with noMessages(), throwing MessagesReceivedError
+ * Functions to get received messages and unmatched messages for(StandIn).from()
  * thenEcho()
  * thenThrow()
  * thenForward(otherActorRef)
- * better error messages for verification errors
  * increase coverage
- * getFor(standIn).from(optionalReceiver).allMessages(), message(), allMessages(exact/condition/class) dto. with messages()
- 
+ * for(standIn).whenSender(optionalReceiver).getAllMessages(), message(), allMessages(exact/condition/class) dto. with messages()
+ * in StandInStubbing for receive, detect multiple matches. so not the first one wins, but accidental use and defining to many matching matchers gives and exception

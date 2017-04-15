@@ -3,7 +3,7 @@ package org.ak80.standin.matcher;
 /**
  * Defines a received message match
  */
-public interface ReceivedMessageMatcher {
+public interface ReceivedMessageMatcher<T> {
 
     /**
      * Returns true if the message matches
@@ -11,7 +11,7 @@ public interface ReceivedMessageMatcher {
      * @param message to match
      * @return true if the message matches
      */
-    boolean matches(Object message);
+    boolean matches(T message);
 
     /**
      * Explain the match

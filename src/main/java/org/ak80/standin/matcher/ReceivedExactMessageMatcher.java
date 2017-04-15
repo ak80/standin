@@ -18,6 +18,6 @@ public class ReceivedExactMessageMatcher implements ReceivedMessageMatcher {
 
     @Override
     public String explain() {
-        return "a message equal to \"" + exactMessage + "\"";
+        return "a message equal to >" + exactMessage + "<";
     }
 }
