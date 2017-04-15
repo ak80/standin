@@ -23,7 +23,9 @@ public class Times implements VerificationMode {
      */
     Times(long numberOfWantedMessages) {
         if (numberOfWantedMessages < 0) {
-            throw new IllegalArgumentException("the wanted number of messages must not be negative, the given value was " + numberOfWantedMessages);
+            throw new IllegalArgumentException("the wanted number of messages " +
+                    "must not be negative, the given value was "
+                    + numberOfWantedMessages);
         }
         this.numberOfWantedMessages = numberOfWantedMessages;
     }

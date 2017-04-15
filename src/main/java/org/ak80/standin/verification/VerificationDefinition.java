@@ -1,5 +1,4 @@
 package org.ak80.standin.verification;
-
 import akka.actor.ActorRef;
 import org.ak80.standin.ReceivedMessage;
 import org.ak80.standin.matcher.ReceivedMessageMatcher;
