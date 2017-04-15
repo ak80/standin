@@ -12,7 +12,7 @@ public class Times implements VerificationMode {
 
     public static final String MATCHED = " [*matched*]";
     public static final String MATCHED_TOO_OFTEN = " [*matched too often*]";
-    //TODO test coverage
+
     private final long wantedNumberOfMessages;
     private long matchedMessagesCount;
 
@@ -104,7 +104,6 @@ public class Times implements VerificationMode {
         return numberOfMatchedMessages < getNumberOfWantedMessages();
     }
 
-    // TODO later print from actor
     String printReceivedMessages(List<ReceivedMessage> receivedMessages, List<ReceivedMessage> matchedMessages) {
         if (receivedMessages.isEmpty()) {
             return "";
