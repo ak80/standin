@@ -2,50 +2,48 @@ package org.ak80.standin;
 
 import akka.actor.ActorRef;
 
+import java.util.Objects;
+
 /**
  * A received message with sender actor
  */
 public class ReceivedMessage {
 
     private final Object message;
-    private final ActorRef receivedFrom;
+    private final ActorRef sender;
 
     public ReceivedMessage(Object message, ActorRef receivedFrom) {
         this.message = message;
-        this.receivedFrom = receivedFrom;
+        this.sender = receivedFrom;
     }
 
     public Object getMessage() {
         return message;
     }
 
-    public ActorRef getReceivedFrom() {
-        return receivedFrom;
+    public ActorRef getSender() {
+        return sender;
     }
 
-    // TODO Test this class/ coverage
     @Override
     public String toString() {
-        return String.format("message >%s< from %s", getMessage(), getReceivedFrom());
-    }
-
-    // TODO equals verifier in test
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ReceivedMessage that = (ReceivedMessage) o;
-
-        if (message != null ? !message.equals(that.message) : that.message != null) return false;
-        return receivedFrom != null ? receivedFrom.equals(that.receivedFrom) : that.receivedFrom == null;
+        return String.format("message >%s< from %s", getMessage(), getSender());
     }
 
     @Override
-    public int hashCode() {
-        int result = message != null ? message.hashCode() : 0;
-        result = 31 * result + (receivedFrom != null ? receivedFrom.hashCode() : 0);
-        return result;
+    public final boolean equals(Object object) {
+        if(object == null || !getClass().isInstance(object)) {
+            return false;
+        }
+        ReceivedMessage other = (ReceivedMessage) object;
+        return Objects.equals(message, other.message)
+                && Objects.equals(sender, other.sender);
+
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(message, sender);
     }
 
 }

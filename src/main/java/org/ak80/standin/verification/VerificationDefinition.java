@@ -25,7 +25,7 @@ public class VerificationDefinition implements ReceivedMessageMatcher<ReceivedMe
     @Override
     public boolean matches(ReceivedMessage message) {
         boolean messageMatches = receivedMessageMatcher.matches(message.getMessage());
-        boolean senderMatches = getSenderRef().isPresent() ? getSenderRef().get().equals(message.getReceivedFrom()) : true;
+        boolean senderMatches = getSenderRef().isPresent() ? getSenderRef().get().equals(message.getSender()) : true;
         return messageMatches && senderMatches;
     }
 
