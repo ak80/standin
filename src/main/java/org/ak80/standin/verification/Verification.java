@@ -13,12 +13,10 @@ import static org.ak80.standin.StandIn.DEFAULT_WAIT;
 /**
  * Send and receive VerificationDefinition to the StandIn
  * <p>
- * TODO test coverage
  */
 class Verification {
 
-    public void doVerificationForReceive(ActorRef standIn, VerificationDefinition verificationDefinition) {
-        // TODO test verify
+    void doVerificationForReceive(ActorRef standIn, VerificationDefinition verificationDefinition) {
         StandIn.verifyStandIn(standIn);
 
         Object reply = getVerificationFromActor(standIn, verificationDefinition);
@@ -29,8 +27,6 @@ class Verification {
 
         if (reply instanceof StandInVerificationException) {
             throw (StandInVerificationException) reply;
-        } else {
-            throw new StandInInternalException("Internal error, unknown reply from StandIn: " + reply);
         }
     }
 
