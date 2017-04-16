@@ -8,7 +8,6 @@ import java.util.Optional;
 
 /**
  * Definition of verification combining receive and sender
- * // TODO test
  */
 public final class VerificationDefinition implements ReceivedMessageMatcher<ReceivedMessage> {
 

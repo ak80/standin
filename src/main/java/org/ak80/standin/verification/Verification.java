@@ -21,10 +21,6 @@ class Verification {
 
         Object reply = getVerificationFromActor(standIn, verificationDefinition);
 
-        if (reply instanceof StandInActor.VerificationOkMessage) {
-            return;
-        }
-
         if (reply instanceof StandInVerificationException) {
             throw (StandInVerificationException) reply;
         }
