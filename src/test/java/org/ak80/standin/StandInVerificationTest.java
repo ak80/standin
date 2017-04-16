@@ -12,6 +12,8 @@ import static org.ak80.standin.verification.Times.never;
 
 public class StandInVerificationTest extends AkkaTest {
 
+    public static final String HELLO = "hello";
+    public static final String GOODBYE = "goodbye";
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
@@ -19,10 +21,10 @@ public class StandInVerificationTest extends AkkaTest {
     public void verify_exact_message_when_expected_message_was_sent() {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
-        standIn.tell("hello", ActorRef.noSender());
+        standIn.tell(HELLO, ActorRef.noSender());
 
         // When Then
-        StandIn.verify(standIn).receivedEq("hello");
+        StandIn.verify(standIn).receivedEq(HELLO);
     }
 
     @Test
@@ -35,28 +37,28 @@ public class StandInVerificationTest extends AkkaTest {
         expectedException.expectMessage("Verification error:\n    no messages received while looking for a message equal to >goodbye<");
 
         // When
-        StandIn.verify(standIn).receivedEq("goodbye");
+        StandIn.verify(standIn).receivedEq(GOODBYE);
     }
 
     @Test
     public void verify_exact_message_when_expected_message_was_not_sent_but_others_where() {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
-        standIn.tell("hello", ActorRef.noSender());
+        standIn.tell(HELLO, ActorRef.noSender());
 
         // expect
         expectedException.expect(MessageNotReceivedError.class);
         expectedException.expectMessage("Verification error:\n    expected message not received, expected a message equal to >goodbye< from any Actor" + "\nReceived messages:\n    message >hello< from Actor[akka://default/deadLetters]");
 
         // When
-        StandIn.verify(standIn).receivedEq("goodbye");
+        StandIn.verify(standIn).receivedEq(GOODBYE);
     }
 
     @Test
     public void verify_message_of_type_when_expected_message_was_sent() {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
-        standIn.tell("hello", ActorRef.noSender());
+        standIn.tell(HELLO, ActorRef.noSender());
 
         // When Then
         StandIn.verify(standIn).receivedAny(String.class);
@@ -67,11 +69,11 @@ public class StandInVerificationTest extends AkkaTest {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
         ActorRef senderMock = StandIn.standIn(actorSystem);
-        standIn.tell("hello", senderMock);
+        standIn.tell(HELLO, senderMock);
 
 
         // When Then
-        StandIn.verify(standIn).from(senderMock).receivedEq("hello");
+        StandIn.verify(standIn).from(senderMock).receivedEq(HELLO);
     }
 
     @Test
@@ -79,7 +81,7 @@ public class StandInVerificationTest extends AkkaTest {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
         ActorRef senderMock = StandIn.standIn(actorSystem);
-        standIn.tell("hello", ActorRef.noSender());
+        standIn.tell(HELLO, ActorRef.noSender());
 
         // expect
         expectedException.expect(MessageNotReceivedError.class);
@@ -89,7 +91,7 @@ public class StandInVerificationTest extends AkkaTest {
                 "    message >hello< from Actor[akka://default/deadLetters]");
 
         // When
-        StandIn.verify(standIn).from(senderMock).receivedEq("hello");
+        StandIn.verify(standIn).from(senderMock).receivedEq(HELLO);
     }
 
     @Test
@@ -97,7 +99,7 @@ public class StandInVerificationTest extends AkkaTest {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
         ActorRef senderMock = StandIn.standIn(actorSystem);
-        standIn.tell("hello", senderMock);
+        standIn.tell(HELLO, senderMock);
 
         // When Then
         StandIn.verify(standIn).from(senderMock).receivedAny(String.class);
@@ -108,7 +110,7 @@ public class StandInVerificationTest extends AkkaTest {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
         ActorRef senderMock = StandIn.standIn(actorSystem);
-        standIn.tell("hello", ActorRef.noSender());
+        standIn.tell(HELLO, ActorRef.noSender());
 
         // expect
         expectedException.expect(MessageNotReceivedError.class);
@@ -126,17 +128,17 @@ public class StandInVerificationTest extends AkkaTest {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
         ActorRef senderMock = StandIn.standIn(actorSystem);
-        standIn.tell("hello", senderMock);
+        standIn.tell(HELLO, senderMock);
 
         // When
-        StandIn.verify(standIn).from(senderMock).received(message -> message.equals("hello"));
+        StandIn.verify(standIn).from(senderMock).received(message -> message.equals(HELLO));
     }
 
     @Test
     public void verify_message_with_predicate_when_expected_message_was_not_sent() {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
-        standIn.tell("goodbye", ActorRef.noSender());
+        standIn.tell(GOODBYE, ActorRef.noSender());
 
         // expect
         expectedException.expect(MessageNotReceivedError.class);
@@ -146,7 +148,7 @@ public class StandInVerificationTest extends AkkaTest {
                 "    message >goodbye< from Actor[akka://default/deadLetters]");
 
         // When
-        StandIn.verify(standIn).received(message -> message.equals("hello"));
+        StandIn.verify(standIn).received(message -> message.equals(HELLO));
     }
 
     @Test
@@ -154,7 +156,7 @@ public class StandInVerificationTest extends AkkaTest {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
         ActorRef senderMock = StandIn.standIn(actorSystem);
-        standIn.tell("hello", ActorRef.noSender());
+        standIn.tell(HELLO, ActorRef.noSender());
 
         // expect
         expectedException.expect(MessageNotReceivedError.class);
@@ -164,14 +166,14 @@ public class StandInVerificationTest extends AkkaTest {
                 "    message >hello< from Actor[akka://default/deadLetters]");
 
         // When
-        StandIn.verify(standIn).from(senderMock).received(message -> message.equals("hello"));
+        StandIn.verify(standIn).from(senderMock).received(message -> message.equals(HELLO));
     }
 
     @Test
     public void verify_once_whenNever_thenFail() {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
-        standIn.tell("hello", ActorRef.noSender());
+        standIn.tell(HELLO, ActorRef.noSender());
 
         // expect
         expectedException.expect(MessageNotReceivedError.class);
@@ -181,17 +183,17 @@ public class StandInVerificationTest extends AkkaTest {
                 + "    message >hello< from Actor[akka://default/deadLetters]");
 
         // When
-        StandIn.verify(standIn).receivedEq("goodbye");
+        StandIn.verify(standIn).receivedEq(GOODBYE);
     }
 
     @Test
     public void verify_never_whenNever_thenOk() {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
-        standIn.tell("hello", ActorRef.noSender());
+        standIn.tell(HELLO, ActorRef.noSender());
 
         // When Then
-        StandIn.verify(standIn).receivedEq("goodbye", never());
+        StandIn.verify(standIn).receivedEq(GOODBYE, never());
     }
 
 }

@@ -11,12 +11,27 @@ import org.junit.rules.ExpectedException;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import static org.ak80.att.BuilderDsl.a;
+import static org.ak80.att.ValueTdf.$String;
 import static org.ak80.att.akkatesttools.FutureTools.askReply;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 
 public class StandInStubbingTest extends AkkaTest {
+
+    public static final String YOU_SEND_A_MESSAGE = "You send a message";
+    public static final String HELLO = "hello";
+    public static final String YOU_SAID_HELLO = "You said hello";
+    public static final String YOU_SEND_ME_A_STRING = "You send me a String";
+    public static final String GOODBYE = "goodbye";
+    public static final String YOU_SAID_GOODBYE = "You said goodbye";
+    public static final String HELLO_AGAIN = "Hello again";
+    public static final String I_REFUSE_TO_SAY_MORE_HELLO = "I refuse to say more hello";
+    public static final String YOU_SAID_SOMETHING = "You said something";
+    public static final String AHOI = "ahoi";
+    public static final String WILL_NEVER_BE_REPLIED_WRONG_ORDER = "will never be replied - wrong order";
+    public static final String SAY_WHAT = "Say what?";
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -27,10 +42,10 @@ public class StandInStubbingTest extends AkkaTest {
         ActorRef standIn = StandIn.standIn(actorSystem);
 
         // When
-        StandIn.when(standIn).receivesAny().thenReply("You send a message");
+        StandIn.when(standIn).receivesAny().thenReply(YOU_SEND_A_MESSAGE);
 
         // Then
-        assertThat(askReply("any", standIn), is("You send a message"));
+        assertThat(askReply(a($String()), standIn), is(YOU_SEND_A_MESSAGE));
     }
 
     @Test
@@ -39,10 +54,10 @@ public class StandInStubbingTest extends AkkaTest {
         ActorRef standIn = StandIn.standIn(actorSystem);
 
         // When
-        StandIn.when(standIn).receivesEq("hello").thenReply("You said hello");
+        StandIn.when(standIn).receivesEq(HELLO).thenReply(YOU_SAID_HELLO);
 
         // Then
-        assertThat(askReply("hello", standIn), is("You said hello"));
+        assertThat(askReply(HELLO, standIn), is(YOU_SAID_HELLO));
     }
 
     @Test
@@ -51,23 +66,23 @@ public class StandInStubbingTest extends AkkaTest {
         ActorRef standIn = StandIn.standIn(actorSystem);
 
         // When
-        StandIn.when(standIn).receivesAny(String.class).thenReply("You send me a String");
+        StandIn.when(standIn).receivesAny(String.class).thenReply(YOU_SEND_ME_A_STRING);
 
         // Then
-        assertThat(askReply("any", standIn), is("You send me a String"));
+        assertThat(askReply(a($String()), standIn), is(YOU_SEND_ME_A_STRING));
     }
 
     @Test
     public void define_reply_for_message_that_matches_predicate() {
         // Given
         ActorRef standIn = StandIn.standIn(actorSystem);
-        Predicate<Object> condition = msg -> msg.equals("hello");
+        Predicate<Object> condition = msg -> msg.equals(HELLO);
 
         // When
-        StandIn.when(standIn).receives(condition).thenReply("You said hello");
+        StandIn.when(standIn).receives(condition).thenReply(YOU_SAID_HELLO);
 
         // Then
-        assertThat(askReply("hello", standIn), is("You said hello"));
+        assertThat(askReply(HELLO, standIn), is(YOU_SAID_HELLO));
     }
 
     @Test
@@ -76,26 +91,27 @@ public class StandInStubbingTest extends AkkaTest {
         ActorRef standIn = StandIn.standIn(actorSystem);
 
         // When
-        StandIn.when(standIn).receivesEq("hello").thenReply("You said hello", "Hello again", "I refuse to say more hello");
+        StandIn.when(standIn).receivesEq(HELLO).thenReply(YOU_SAID_HELLO, HELLO_AGAIN, I_REFUSE_TO_SAY_MORE_HELLO);
 
         // Then
-        assertThat(askReply("hello", standIn), is("You said hello"));
-        assertThat(askReply("hello", standIn), is("Hello again"));
-        assertThat(askReply("hello", standIn), is("I refuse to say more hello"));
-        assertThat(askReply("hello", standIn), is("I refuse to say more hello"));
+        assertThat(askReply(HELLO, standIn), is(YOU_SAID_HELLO));
+        assertThat(askReply(HELLO, standIn), is(HELLO_AGAIN));
+        assertThat(askReply(HELLO, standIn), is(I_REFUSE_TO_SAY_MORE_HELLO));
+        assertThat(askReply(HELLO, standIn), is(I_REFUSE_TO_SAY_MORE_HELLO));
     }
 
     @Test
     public void define_reply_through_function() {
         // Given
+        assert !HELLO.equals(HELLO.toUpperCase());
         ActorRef standIn = StandIn.standIn(actorSystem);
 
         // When
         Function<Object, Object> replyFunction = msg -> msg.toString().toUpperCase();
-        StandIn.when(standIn).receivesEq("hello").thenReplyWith(replyFunction);
+        StandIn.when(standIn).receivesEq(HELLO).thenReplyWith(replyFunction);
 
         // Then
-        assertThat(askReply("hello", standIn), is("HELLO"));
+        assertThat(askReply(HELLO, standIn), is(HELLO.toUpperCase()));
     }
 
     @Test
@@ -105,18 +121,18 @@ public class StandInStubbingTest extends AkkaTest {
 
         // When
         StandIn.when(standIn)
-                .receivesEq("hello").thenReply("You said hello")
-                .receivesEq("goodbye").thenReply("You said goodbye")
-                .receivesAny(String.class).thenReply("You said something")
-                .receivesEq("ahoi").thenReply("will never be replied - wrong order")
-                .receivesAny().thenReply("Say what?");
+                .receivesEq(HELLO).thenReply(YOU_SAID_HELLO)
+                .receivesEq(GOODBYE).thenReply(YOU_SAID_GOODBYE)
+                .receivesAny(String.class).thenReply(YOU_SAID_SOMETHING)
+                .receivesEq(AHOI).thenReply(WILL_NEVER_BE_REPLIED_WRONG_ORDER)
+                .receivesAny().thenReply(SAY_WHAT);
 
         // Then
-        assertThat(askReply("hello", standIn), is("You said hello"));
-        assertThat(askReply("goodbye", standIn), is("You said goodbye"));
-        assertThat(askReply("any", standIn), is("You said something"));
-        assertThat(askReply("ahoi", standIn), is("You said something"));
-        assertThat(askReply(Integer.valueOf(1), standIn), is("Say what?"));
+        assertThat(askReply(HELLO, standIn), is(YOU_SAID_HELLO));
+        assertThat(askReply(GOODBYE, standIn), is(YOU_SAID_GOODBYE));
+        assertThat(askReply(a($String()), standIn), is(YOU_SAID_SOMETHING));
+        assertThat(askReply(AHOI, standIn), is(YOU_SAID_SOMETHING));
+        assertThat(askReply(Integer.valueOf(1), standIn), is(SAY_WHAT));
     }
 
 }
