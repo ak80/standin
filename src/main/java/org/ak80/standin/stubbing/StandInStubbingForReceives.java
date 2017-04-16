@@ -8,16 +8,15 @@ import java.util.function.Predicate;
 
 /**
  * Fluent stubbing for a StandIn to define receives
- * <p>
- * Uses "receive" methods to define what how to match incoming messages and
+ * <p> Uses "receive" methods to define what how to match incoming messages and
  * "thenReply" methods to define what is sent back.
- * <p>
- * The order of defining the receives is important, first match wins
+ * <p> The order of defining the receives is important, first match wins
  * </p>
  */
 public final class StandInStubbingForReceives {
 
     private final ActorRef standIn;
+
     private ReceivedMessageMatcher messageMatcher;
 
     public StandInStubbingForReceives(ActorRef standIn) {

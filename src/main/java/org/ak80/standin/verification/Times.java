@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Define optionally how often a message is wanted to be received
  */
-public class Times implements VerificationMode {
+public final class Times implements VerificationMode {
 
     public static final String MATCHED = " [*matched*]";
     public static final String MATCHED_TOO_OFTEN = " [*matched too often*]";
@@ -23,8 +23,8 @@ public class Times implements VerificationMode {
      */
     Times(long numberOfWantedMessages) {
         if (numberOfWantedMessages < 0) {
-            throw new IllegalArgumentException("the wanted number of messages " +
-                    "must not be negative, the given value was "
+            throw new IllegalArgumentException("the wanted number of messages "
+                    + "must not be negative, the given value was "
                     + numberOfWantedMessages);
         }
         this.numberOfWantedMessages = numberOfWantedMessages;

@@ -45,7 +45,7 @@ public final class StandInStubbingForReply {
     /**
      * Defines that the reply messages are created with a function
      *
-     * @param replyFunction
+     * @param replyFunction function that creates a reply, optionally based on the input message
      * @return stubbing to define received
      */
     public <T, R> StandInStubbingForReceives thenReplyWith(Function<T, R> replyFunction) {

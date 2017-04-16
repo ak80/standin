@@ -10,6 +10,7 @@ import java.util.Objects;
 public final class ReceivedMessage {
 
     private final Object message;
+
     private final ActorRef sender;
 
     public ReceivedMessage(Object message, ActorRef receivedFrom) {

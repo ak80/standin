@@ -63,7 +63,6 @@ public class StandInTest extends AkkaTest {
         StandIn.verify(standIn);
     }
 
-
     @Test
     public void testWhen_createsStandInStubbingForReceives() {
         // Given
@@ -82,4 +81,5 @@ public class StandInTest extends AkkaTest {
         // When
        assertThat(standIn.path().name(), is(name));
     }
+
 }

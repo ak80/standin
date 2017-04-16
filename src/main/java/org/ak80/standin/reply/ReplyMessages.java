@@ -6,6 +6,7 @@ package org.ak80.standin.reply;
 public final class ReplyMessages implements ReplyMessageDefinition {
 
     private final Object[] definedMessages;
+
     private int index = -1;
 
     public ReplyMessages(Object... definedMessages) {

@@ -17,18 +17,18 @@ import java.util.concurrent.ExecutionException;
 public abstract class StandIn extends AbstractActor {
 
     /**
-     * do not allow instantiation, this is a interface class with static methods
-     */
-    private StandIn() {
-        // singleton - all methods static
-    }
-
-    /**
      * Default wait time for waiting for actor reply
      */
     public static final long DEFAULT_WAIT = 1000;
 
     private static final long BIGGER_COUNT = 100L;
+    
+    /**
+     * do not allow instantiation, this is a interface class with static methods
+     */
+    private StandIn() {
+        // singleton - all methods static
+    }
 
     /**
      * Create a standIn, a stub/mock Actor
